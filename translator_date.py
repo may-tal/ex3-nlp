@@ -111,16 +111,16 @@ class DateTranslator:
         parts[-1] = parts[-1][:-1]
         parts.append('.')
         double_digit = False
-        single = False
+        # single = False
         for i in range(len(parts)):
             if double_digit:
                 double_digit = False
                 continue
 
-            if single:
-                single = False
-                if parts[i] == "אחד":
-                    continue
+            # if single:
+            #     single = False
+            #     if parts[i] == "אחד":
+            #         continue
 
             # if word start with "and" remove it
             if parts[i][0] == "ו":
@@ -136,7 +136,7 @@ class DateTranslator:
             elif parts[i] in token_map:
                 if parts[i] == "יום" or parts[i] == "שבוע" or parts[i] == "חודש":
                     tokens.append((Token.NUM, 1))
-                    single = True
+                    # single = True
                 tokens.append((token_map[parts[i]], 0))
 
             elif parts[i] == "יומיים":
@@ -172,14 +172,9 @@ class DateTranslator:
         return str(self.translate_date(tokens)).split('T')[0].replace("-", "")
 
 
-# def main():
-#     date_translator = DateTranslator("20200219")
-#     print(date_translator.run("לפני אחד ימים ושלושה שבועות ושני חודשים."))
-#     a = arrow.get("20200219")
-#     a= a.shift(days=-1)
-#     a = a.shift(months=-2)
-#     a= a.shift(weeks=-3)
-#
-#     print(a)
-# main()
+def main():
+    date_translator = DateTranslator()
+    print(date_translator.run("לפני חודש."))
+
+main()
 
