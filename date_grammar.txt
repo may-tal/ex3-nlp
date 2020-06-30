@@ -1,2 +1,29 @@
-expr ::= +term term term|+term term|+term|+term term term|+term term|+term
-term ::= unit num
+# Yarden Tal, May Tal
+
+Terminal:
+DAY, WEEK, MONTH, PLUS, MINUS, END, NUM, EPSILON
+
+Tokenization:
+DAY ::= יום | ימים
+WEEK ::= שבוע | שבועות
+MONTH ::= חודש | חודשים
+END ::= .
+MINUS ::= לפני
+PLUS ::= בעוד
+ו ::= EPSILON
+יומיים ::= DAY 2
+שבועיים ::= WEEK 2
+חודשיים ::= MONTH 2
+היום ::= PLUS DAY 0
+אתמול ::= MINUS DAY 1
+מחר ::= PLUS DAY 1
+NUM = {1, ..,31}
+
+
+Grammer:
+expr ::= (PLUS | MINUS)term term term|(PLUS | MINUS)term term|(PLUS | MINUS)term
+term ::= (DAY | WEEK | MONTH) NUM
+
+
+
+
